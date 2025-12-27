@@ -4,9 +4,9 @@ import { useAuth } from '@context/AuthContext'
 import { Button, Input, Icon } from '@components/ui'
 
 const LoginPage = () => {
-  const { signIn } = useAuth()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const { signIn, isMockMode } = useAuth()
+  const [email, setEmail] = useState('admin@crmap.cl')
+  const [password, setPassword] = useState('admin123')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -35,6 +35,14 @@ const LoginPage = () => {
         <h1 className="text-3xl font-bold text-primary-800 mb-2">CRMAP</h1>
         <p className="text-gray-500">Sistema de Gestión</p>
       </div>
+
+      {/* Mock Mode Banner */}
+      {isMockMode && (
+        <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-xl text-center">
+          <p className="text-sm text-amber-700 font-medium">🔧 Modo Demo</p>
+          <p className="text-xs text-amber-600">Datos de ejemplo - Sin conexión a BD</p>
+        </div>
+      )}
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -84,20 +92,21 @@ const LoginPage = () => {
       </form>
 
       {/* Footer */}
-      <div className="mt-6 text-center">
-        <Link
-          to="/forgot-password"
-          className="text-sm text-primary-600 hover:text-primary-700 font-medium"
-        >
-          ¿Olvidaste tu contraseña?
-        </Link>
-      </div>
+      {!isMockMode && (
+        <div className="mt-6 text-center">
+          <Link
+            to="/forgot-password"
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+          >
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
+      )}
 
       {/* Demo Info */}
       <div className="mt-8 p-4 bg-gray-50 rounded-xl text-center">
-        <p className="text-xs text-gray-500">
-          <strong>Ambiente:</strong> {import.meta.env.VITE_APP_ENV || 'development'}
-        </p>
+        <p className="text-xs text-gray-600 font-medium mb-1">Credenciales de Demo:</p>
+        <p className="text-xs text-gray-500">admin@crmap.cl / admin123</p>
       </div>
     </div>
   )

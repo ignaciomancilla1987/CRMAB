@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getCodigos } from '@services/dataService'
 import { useApp } from '@context/AppContext'
 import { Button, Icon } from '@components/ui'
 
@@ -15,7 +15,7 @@ const CodigosPage = () => {
 
   const fetchCodigos = async () => {
     setLoading(true)
-    const { data, error } = await supabase.from('codigos_servicio').select('*').order('codigo')
+    const { data, error } = await getCodigos()
     if (error) showNotification('Error al cargar códigos', 'error')
     else setCodigos(data || [])
     setLoading(false)

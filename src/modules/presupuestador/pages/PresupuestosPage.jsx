@@ -1,31 +1,35 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getPresupuestos, getClientes } from '@services/dataService'
 import { useApp } from '@context/AppContext'
 import { Button, Icon } from '@components/ui'
 
 const PresupuestosPage = () => {
   const { showNotification } = useApp()
   const [presupuestos, setPresupuestos] = useState([])
+  const [clientes, setClientes] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    fetchPresupuestos()
+    fetchData()
   }, [])
 
-  const fetchPresupuestos = async () => {
+  const fetchData = async () => {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('presupuestos')
-      .select(`*, clientes(nombre)`)
-      .order('created_at', { ascending: false })
+    const [presRes, cliRes] = await Promise.all([getPresupuestos(), getClientes()])
 
-    if (error) {
+    if (presRes.error) {
       showNotification('Error al cargar presupuestos', 'error')
     } else {
-      setPresupuestos(data || [])
+      setPresupuestos(presRes.data || [])
     }
+    setClientes(cliRes.data || [])
     setLoading(false)
+  }
+
+  const getClienteName = (clienteId) => {
+    const cliente = clientes.find(c => c.id === clienteId)
+    return cliente?.nombre || presupuestos.find(p => p.cliente_id === clienteId)?.clientes?.nombre || 'N/A'
   }
 
   const filteredPresupuestos = presupuestos.filter(p =>
@@ -101,7 +105,7 @@ const PresupuestosPage = () => {
             ) : filteredPresupuestos.map((p) => (
               <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="px-5 py-4 font-semibold text-purple-600">{p.numero}</td>
-                <td className="px-5 py-4 text-gray-600">{p.clientes?.nombre || 'N/A'}</td>
+                <td className="px-5 py-4 text-gray-600">{getClienteName(p.cliente_id)}</td>
                 <td className="px-5 py-4 text-gray-600">{p.fecha}</td>
                 <td className="px-5 py-4 font-semibold">{formatCurrency(p.total)}</td>
                 <td className="px-5 py-4">

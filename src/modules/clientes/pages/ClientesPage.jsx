@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getClientes } from '@services/dataService'
 import { useApp } from '@context/AppContext'
 import { Button, Icon } from '@components/ui'
 
@@ -16,10 +16,7 @@ const ClientesPage = () => {
 
   const fetchClientes = async () => {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('clientes')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data, error } = await getClientes()
 
     if (error) {
       showNotification('Error al cargar clientes', 'error')

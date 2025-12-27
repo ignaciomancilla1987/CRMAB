@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getUsuarios } from '@services/dataService'
 import { useApp } from '@context/AppContext'
 import { useAuth } from '@context/AuthContext'
-import { Button, Input, Icon, Modal, Select } from '@components/ui'
+import { Button, Icon } from '@components/ui'
 
 const UsuariosPage = () => {
   const { showNotification } = useApp()
@@ -19,10 +19,7 @@ const UsuariosPage = () => {
 
   const fetchUsuarios = async () => {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('usuarios')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data, error } = await getUsuarios()
 
     if (error) {
       showNotification('Error al cargar usuarios', 'error')

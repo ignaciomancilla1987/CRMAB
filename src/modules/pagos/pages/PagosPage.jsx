@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getPresupuestosConPagos, getClientes } from '@services/dataService'
 import { useApp } from '@context/AppContext'
 import { Button, Icon } from '@components/ui'
 
 const PagosPage = () => {
   const { showNotification } = useApp()
   const [pagos, setPagos] = useState([])
+  const [clientes, setClientes] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -15,14 +16,16 @@ const PagosPage = () => {
 
   const fetchPagos = async () => {
     setLoading(true)
-    const { data, error } = await supabase
-      .from('presupuestos')
-      .select(`*, clientes(nombre), pagos(*)`)
-      .eq('estado', 'aprobado')
-      .order('created_at', { ascending: false })
-    if (error) showNotification('Error al cargar pagos', 'error')
-    else setPagos(data || [])
+    const [pagosRes, clientesRes] = await Promise.all([getPresupuestosConPagos(), getClientes()])
+    if (pagosRes.error) showNotification('Error al cargar pagos', 'error')
+    else setPagos(pagosRes.data || [])
+    setClientes(clientesRes.data || [])
     setLoading(false)
+  }
+
+  const getClienteName = (p) => {
+    const cliente = clientes.find(c => c.id === p.cliente_id)
+    return cliente?.nombre || getClienteName(p)
   }
 
   const formatCurrency = (v) => new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(v || 0)
@@ -107,7 +110,7 @@ const PagosPage = () => {
               return (
                 <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="px-5 py-4 font-semibold text-success-600">{p.numero}</td>
-                  <td className="px-5 py-4 text-gray-600">{p.clientes?.nombre || 'N/A'}</td>
+                  <td className="px-5 py-4 text-gray-600">{getClienteName(p)}</td>
                   <td className="px-5 py-4 font-semibold">{formatCurrency(p.total)}</td>
                   <td className="px-5 py-4 font-semibold text-success-600">{formatCurrency(calcularPagado(p))}</td>
                   <td className="px-5 py-4 font-semibold" style={{ color: saldo > 0 ? '#DC2626' : '#059669' }}>{formatCurrency(saldo)}</td>

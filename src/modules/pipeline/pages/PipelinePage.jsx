@@ -1,16 +1,8 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@services/supabase'
+import { getTratos } from '@services/dataService'
+import { etapas } from '@/data/mockData'
 import { useApp } from '@context/AppContext'
 import { Button, Icon } from '@components/ui'
-
-const etapas = [
-  { id: 'contacto', nombre: 'Contacto Inicial', color: '#6366F1' },
-  { id: 'propuesta', nombre: 'Propuesta', color: '#EC4899' },
-  { id: 'en_proceso', nombre: 'En Proceso', color: '#3B82F6' },
-  { id: 'documentacion', nombre: 'Documentación', color: '#06B6D4' },
-  { id: 'revision', nombre: 'Revisión Final', color: '#10B981' },
-  { id: 'cerrado', nombre: 'Cerrado', color: '#059669' },
-]
 
 const PipelinePage = () => {
   const { showNotification } = useApp()
@@ -23,7 +15,7 @@ const PipelinePage = () => {
 
   const fetchTratos = async () => {
     setLoading(true)
-    const { data, error } = await supabase.from('tratos').select('*').order('created_at', { ascending: false })
+    const { data, error } = await getTratos()
     if (error) showNotification('Error al cargar tratos', 'error')
     else setTratos(data || [])
     setLoading(false)
