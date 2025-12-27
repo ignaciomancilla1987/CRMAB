@@ -133,8 +133,6 @@ CREATE TABLE IF NOT EXISTS pagos (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
-
-
 -- =============================================
 -- TRIGGERS para updated_at
 -- =============================================
