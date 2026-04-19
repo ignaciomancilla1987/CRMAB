@@ -1,6 +1,8 @@
 import { Routes, Route, NavLink } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
 import Eventos from './pages/Eventos'
+import EventoDetalle from './pages/EventoDetalle'
+import Simular from './pages/Simular'
 import Alertas from './pages/Alertas'
 
 function NavItem({ to, children }: { to: string; children: React.ReactNode }) {
@@ -39,6 +41,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/eventos" element={<Eventos />} />
+          <Route path="/eventos/:id" element={<EventoDetalle />} />
+          <Route path="/simular/:id" element={<Simular />} />
           <Route path="/alertas" element={<Alertas />} />
         </Routes>
       </main>
