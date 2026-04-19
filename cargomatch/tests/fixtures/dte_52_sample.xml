@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<DTE version="1.0" xmlns="http://www.sii.cl/SiiDte">
+  <Documento ID="F123456T52">
+    <Encabezado>
+      <IdDoc>
+        <TipoDTE>52</TipoDTE>
+        <Folio>123456</Folio>
+        <FchEmis>2026-04-19</FchEmis>
+        <IndTraslado>1</IndTraslado>
+      </IdDoc>
+      <Emisor>
+        <RUTEmisor>76123456-7</RUTEmisor>
+        <RznSoc>Constructora Andina SpA</RznSoc>
+        <GiroEmis>Construccion</GiroEmis>
+        <Acteco>41101</Acteco>
+        <DirOrigen>Av. Providencia 1234</DirOrigen>
+        <CmnaOrigen>Santiago</CmnaOrigen>
+      </Emisor>
+      <Receptor>
+        <RUTRecep>77987654-3</RUTRecep>
+        <RznSocRecep>Ferreteria El Roble Ltda</RznSocRecep>
+        <GiroRecep>Comercio al por menor</GiroRecep>
+        <DirRecep>Camino Las Rosas 5678</DirRecep>
+        <CmnaRecep>Rancagua</CmnaRecep>
+      </Receptor>
+      <Transporte>
+        <Patente>JHPW21</Patente>
+        <RUTTrans>12345678-9</RUTTrans>
+        <DirDest>Camino Las Rosas 5678</DirDest>
+        <CmnaDest>Rancagua</CmnaDest>
+      </Transporte>
+      <Totales>
+        <MntNeto>235000</MntNeto>
+        <TasaIVA>19</TasaIVA>
+        <IVA>44650</IVA>
+        <MntTotal>279650</MntTotal>
+      </Totales>
+    </Encabezado>
+    <Detalle>
+      <NroLinDet>1</NroLinDet>
+      <CdgItem>
+        <TpoCodigo>INT1</TpoCodigo>
+        <VlrCodigo>CEM-25</VlrCodigo>
+      </CdgItem>
+      <NmbItem>Saco cemento Polpaico 25 kg</NmbItem>
+      <QtyItem>40</QtyItem>
+      <UnmdItem>SACO</UnmdItem>
+      <PrcItem>3500</PrcItem>
+      <MontoItem>140000</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>2</NroLinDet>
+      <CdgItem>
+        <TpoCodigo>INT1</TpoCodigo>
+        <VlrCodigo>ZNC-07</VlrCodigo>
+      </CdgItem>
+      <NmbItem>Plancha zinc 0.7 mm 2.0 x 0.9 m</NmbItem>
+      <QtyItem>10</QtyItem>
+      <UnmdItem>UN</UnmdItem>
+      <PrcItem>9500</PrcItem>
+      <MontoItem>95000</MontoItem>
+    </Detalle>
+  </Documento>
+</DTE>

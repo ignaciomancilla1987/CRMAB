@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<DTE version="1.0" xmlns="http://www.sii.cl/SiiDte">
+  <Documento ID="F987654T33">
+    <Encabezado>
+      <IdDoc>
+        <TipoDTE>33</TipoDTE>
+        <Folio>987654</Folio>
+        <FchEmis>2026-04-19</FchEmis>
+      </IdDoc>
+      <Emisor>
+        <RUTEmisor>76123456-7</RUTEmisor>
+        <RznSoc>Constructora Andina SpA</RznSoc>
+        <GiroEmis>Construccion</GiroEmis>
+        <Acteco>41101</Acteco>
+        <DirOrigen>Av. Providencia 1234</DirOrigen>
+        <CmnaOrigen>Santiago</CmnaOrigen>
+      </Emisor>
+      <Receptor>
+        <RUTRecep>96543210-K</RUTRecep>
+        <RznSocRecep>Obras Civiles del Sur SA</RznSocRecep>
+        <GiroRecep>Construccion</GiroRecep>
+        <DirRecep>Ruta 5 Sur KM 560</DirRecep>
+        <CmnaRecep>Temuco</CmnaRecep>
+      </Receptor>
+      <Transporte>
+        <Patente>LKDR88</Patente>
+      </Transporte>
+      <Totales>
+        <MntNeto>420000</MntNeto>
+        <TasaIVA>19</TasaIVA>
+        <IVA>79800</IVA>
+        <MntTotal>499800</MntTotal>
+      </Totales>
+    </Encabezado>
+    <Detalle>
+      <NroLinDet>1</NroLinDet>
+      <CdgItem>
+        <TpoCodigo>INT1</TpoCodigo>
+        <VlrCodigo>PER-40</VlrCodigo>
+      </CdgItem>
+      <NmbItem>Perfil metalico 40x40x2 mm x 6 m</NmbItem>
+      <QtyItem>20</QtyItem>
+      <UnmdItem>UN</UnmdItem>
+      <PrcItem>12000</PrcItem>
+      <MontoItem>240000</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>2</NroLinDet>
+      <CdgItem>
+        <TpoCodigo>INT1</TpoCodigo>
+        <VlrCodigo>TUB-110</VlrCodigo>
+      </CdgItem>
+      <NmbItem>Tubo PVC sanitario 110 mm x 6 m</NmbItem>
+      <QtyItem>30</QtyItem>
+      <UnmdItem>UN</UnmdItem>
+      <PrcItem>6000</PrcItem>
+      <MontoItem>180000</MontoItem>
+    </Detalle>
+  </Documento>
+</DTE>
