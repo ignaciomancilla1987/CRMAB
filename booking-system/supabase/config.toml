@@ -1,0 +1,48 @@
+# =====================================================================
+# Supabase CLI — Configuración del proyecto
+# Panel SIP Met Corp — Sistema de Agendamiento de Visitas
+# =====================================================================
+# Docs: https://supabase.com/docs/guides/cli/config
+# El "project_id" es solo una etiqueta local; el proyecto remoto se
+# enlaza con:  supabase link --project-ref <PROJECT_REF>
+project_id = "panelsipmet-reservas"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+# Servidor local de correos (captura los envíos en desarrollo).
+[inbucket]
+enabled = true
+port = 54324
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["https://www.panelsipmetcorp.cl"]
+
+# ---------------------------------------------------------------------
+# Edge Function: notify-reserva
+# La invoca el trigger de la base de datos con la service_role key,
+# por eso se deshabilita la verificación de JWT.
+# ---------------------------------------------------------------------
+[functions.notify-reserva]
+verify_jwt = false
+
+# En desarrollo local, `supabase db reset` ejecuta automáticamente
+# las migraciones y luego este archivo de datos de ejemplo.
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
